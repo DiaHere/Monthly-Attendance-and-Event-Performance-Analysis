@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
+
 import os
-import pandas as pd
-import glob
-import re
+import csv
+
+
 
 def scrab_all_year_data():
     """
@@ -81,59 +81,18 @@ def scrab_all_year_data():
     return events_title_time_list
 
 
-def post_event_survey_responses(folder_path):
-    """
-    Processes CSV files in a specified folder containing post-event survey responses,
-    extracts the event name from the file names, and concatenates all responses into
-    a single pandas DataFrame.
-    
-    The filename pattern is expected to match:
-        PostShowSurvey{surveyNumber}{year}{eventName}{optionalTrailingDigits}.csv
 
-    Args:
-        folder_path (str): Relative path to the folder containing the CSV files.
-
-    Returns:
-        DataFrame: A pandas DataFrame with all survey responses and an added column 
-                   "event" containing the extracted event name.
-    """
-    # Build the data directory using a path relative to this file.
-    data_dir = os.path.join(os.path.dirname(__file__), folder_path)
-    files = glob.glob(os.path.join(data_dir, "*.csv"))
-    
-    pattern = r'PostShowSurvey\d+\d{4}(.+?)(\d*)\.csv$'
-    df_list = []
-    
-    for file in files:
-        # Read each file into a DataFrame.
-        df = pd.read_csv(file)
-
-        # Extract event name from the filename (use basename to remove directory info).
-        filename = os.path.basename(file)
-        match = re.search(pattern, filename)
-        if match:
-            event_name = match.group(1)
-            # Create a new column "event" in the DataFrame.
-            df['event'] = event_name
-        df_list.append(df)
-
-    # Combine all DataFrames into one.
-    combined_df = pd.concat(df_list, ignore_index=True)
-    return combined_df
-    
 
 def export_to_csv(data, filename="output.csv"):
     """
-    Exports the given data to a CSV file. If the data is a list of dictionaries,
-    it uses the csv module. If the data is a pandas DataFrame, it utilizes the 
-    DataFrame's to_csv() method.
+    Exports the given data to a CSV file.
+    it uses the csv module. 
     
     Args:
         data: The data to export; can be either a list of dictionaries or a DataFrame.
         filename (str): The target CSV file name.
     """
     if isinstance(data, list):
-        # Assume list of dictionaries.
         if not data:
             print("No data to export.")
             return
@@ -145,11 +104,6 @@ def export_to_csv(data, filename="output.csv"):
             writer.writeheader()
             for row in data:
                 writer.writerow(row)
-    elif isinstance(data, pd.DataFrame):
-        data.to_csv(filename, index=False, encoding="utf-8")
-    else:
-        print("Data type not supported for CSV export.")
-    
 
 def main():
     """
@@ -157,22 +111,20 @@ def main():
         1. Checks if 'events_data.csv' exists. If not, scrapes event data and exports it.
         2. Checks if 'post_events_survey_data.csv' exists. If not, processes survey responses and exports them.
     """
+
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+
+    # Build the absolute paths for the input folder and output CSV inside data_raw.
+    output_csv_path = os.path.join(base_dir, "data_raw")
+
+
     # Export scraped event data.
-    if os.path.exists('events_data.csv'):
+    if os.path.exists(output_csv_path):
         print('"events_data.csv" already exists. Skipping download.')
     else:
         events = scrab_all_year_data()
-        export_to_csv(events, filename="events_data.csv")
+        export_to_csv(events, filename=output_csv_path)
         print("Exported event data to 'events_data.csv'.")
-
-    # Export post-event survey responses.
-    if os.path.exists('post_events_survey_data.csv'):
-        print('"post_events_survey_data.csv" already exists. Skipping download.')
-    else:
-        survey = post_event_survey_responses('Post-Event-Survey-Responses')
-        export_to_csv(survey, filename="post_events_survey_data.csv")
-        print("Exported survey data to 'post_events_survey_data.csv'.")
-    
 
 if __name__ == '__main__':
     main()
