@@ -78,16 +78,16 @@ def main():
     
     # Build the absolute paths for the input folder and output CSV inside data_raw.
     survey_folder = os.path.join(base_dir, "data_raw", "Post-Event-Survey-Responses")
-    output_csv_path = os.path.join(base_dir, "data_raw", "post_events_survey_data.csv")
+    output_csv_path = os.path.join(base_dir, "data_raw", "post_events_survey_data_combined.csv")
 
     # Check if the combined survey CSV already exists.
     if os.path.exists(output_csv_path):
-        print("post_events_survey_data.csv already exists. Skipping export.")
+        print("post_events_survey_data_combined.csv already exists. Skipping export.")
     else:
-        print("post_events_survey_data.csv not found. Processing survey responses...")
+        print("post_events_survey_data_combined.csv not found. Processing survey responses...")
         survey_df = post_event_survey_responses(survey_folder)
         export_to_csv(survey_df, filename=output_csv_path)
-        print("Exported survey data to post_events_survey_data.csv")
+        print("Exported survey data to post_events_survey_data_combined.csv")
 
 
 if __name__ == '__main__':
