@@ -79,5 +79,5 @@ SELECT *
 FROM tickets;
 
 
--- View alA TABLES
+-- View all TABLES
 SHOW TABLES;
