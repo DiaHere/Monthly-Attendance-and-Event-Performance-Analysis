@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS attendance(
 SELECT *
 FROM attendance;
 
+
 -- Create events table
 CREATE TABLE IF NOT EXISTS events(
     event_title VARCHAR(100) PRIMARY KEY,
