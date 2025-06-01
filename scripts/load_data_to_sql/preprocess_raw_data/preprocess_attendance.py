@@ -8,7 +8,10 @@ def load_csv_attendance():
     project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
     
     file_path = os.path.join(project_root, '..', 'data_raw', 'attendance_performance_data.csv')
-    df_attendance = pd.read_csv(file_path)
+    return pd.read_csv(file_path)
+
+def preprocess_df_attendance():
+    df_attendance = load_csv_attendance()
 
     # Clean the data
     # Change the date column to a date format
@@ -25,5 +28,6 @@ def load_csv_attendance():
 
     # return the dataframe
     return df_attendance
-    
 
+
+    
