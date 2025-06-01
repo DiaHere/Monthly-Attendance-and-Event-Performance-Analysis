@@ -2,6 +2,8 @@ from preprocess_raw_data.preprocess_attendance import preprocess_df_attendance
 from preprocess_raw_data.preprocess_events import preprocess_df_events
 from preprocess_raw_data.preprocess_post_event_surverys import preprocess_df_post_event_sur
 from preprocess_raw_data.preprocess_donations import preprocess_df_donations
+from preprocess_raw_data.preprocess_credits_refunded import preprocess_df_refunds
+from preprocess_raw_data.preprocess_tickets import preprocess_df_tickets
 
 
 from universal_loader import load_data_to_sql
@@ -25,8 +27,16 @@ def main():
     load_data_to_sql(df_surveys, 'post_event_surveys', surveys_col, 'event_title')
 
     df_donations = preprocess_df_donations()
-    print(df_donations)
+    donations_col = df_donations.columns
+    load_data_to_sql(df_donations, 'donations', donations_col, 'date_range')
 
+    df_refunds = preprocess_df_refunds()
+    refunds_col = df_refunds.columns
+    load_data_to_sql(df_refunds, 'credit_refunds', refunds_col, 'date_range')
+
+    df_tickets = preprocess_df_tickets()
+    tickets_col = df_tickets.columns
+    load_data_to_sql(df_tickets, 'tickets', tickets_col, 'date_range')
 
 if __name__ == '__main__':
     main()
