@@ -22,23 +22,23 @@ CREATE TABLE IF NOT EXISTS events(
     event_title VARCHAR(100) PRIMARY KEY,
     date DATE,
     start_time INT,
-    end_time INT,
+    end_time INT
 );
 
 -- View the events table
 SELECT *
 FROM events;
 
---Create post event survey responses table
+-- Create post event survey responses table
 CREATE TABLE IF NOT EXISTS post_event_surveys(
+    event_title VARCHAR(100),
     id INT PRIMARY KEY,
     date DATE,
-    source_of_hearing VARCHAR(20),
-    age_group INT,
+    source_of_hearing TEXT,
+    age_group VARCHAR(15),
     annual_household_income VARCHAR(20),
-    overal_event_expression VARCHAR(1000),
-    feeback_suggestion VARCHAR(1000),
-    event_title VARCHAR(100)
+    overal_event_expression TEXT,
+    feeback_suggestion TEXT
 );
 
 -- View post_event_surveys
@@ -48,9 +48,13 @@ FROM post_event_surveys;
 
 -- Create donations table
 CREATE TABLE IF NOT EXISTS donations(
-    date_range DATE PRIMARY KEY,
+    date_range DATE,
     donation_received INT
 );
+
+ALTER TABLE donations
+MODIFY date_range DATE,
+DROP PRIMARY KEY;
 
 -- View donations
 SELECT *
@@ -58,7 +62,7 @@ FROM donations;
 
 -- Create Credit Refunds table
 CREATE TABLE IF NOT EXISTS credit_refunds(
-    date_range DATE PRIMARY KEY,
+    date_range DATE,
     credit_refunded INT,
     payment_type VARCHAR(20)
 );
@@ -69,9 +73,9 @@ FROM credit_refunds;
 
 -- Create tickets table
 CREATE TABLE IF NOT EXISTS tickets(
-    date_range DATE PRIMARY KEY,
-    ticket_purchased INT,
+    date_range DATE,
     event_title VARCHAR(100),
+    payment_type VARCHAR(20),
     ticket_prices INT
 );
 
