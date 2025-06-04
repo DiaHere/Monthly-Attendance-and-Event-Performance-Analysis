@@ -1,6 +1,5 @@
 import mysql.connector
 from config import DB_CONFIG 
-import os
 
 def get_connection():
     """Open and return a MySQL connection using DB_CONFIG."""

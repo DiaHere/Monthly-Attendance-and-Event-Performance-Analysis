@@ -13,13 +13,16 @@ warnings.filterwarnings('ignore') # Ignores all warnings
 warnings.filterwarnings('ignore', category=DeprecationWarning) # Ignores only DeprecationWarnings
 
 def main():
-    # attendance performance data loading
+    # the preprocessed and cleaned attendance performance data 
     df_attendance = preprocess_df_attendance()
     attendance_col = df_attendance.columns
+    # loading the ready data into the sql database to the correct table and primary key
     load_data_to_sql(df_attendance, 'attendance', attendance_col, 'month_year')
 
+    # the preprocessed and cleaned events data 
     df_events = preprocess_df_events()
     envets_col = df_events.columns
+    # loading the ready data into the sql database to the correct table and primary key
     load_data_to_sql(df_events, 'events', envets_col, 'event_title')
 
     df_surveys = preprocess_df_post_event_sur()

@@ -5,26 +5,12 @@ import os
 import csv
 
 def scrab_all_year_data():
-    """
-    Scrapes event data from the Gesa Power House Theatre website for events between 2023 and Feb 2025.
-    
-    This function iterates through each month within the given year range, sends HTTP GET 
-    requests to the monthly events pages, and uses BeautifulSoup to extract event titles, dates, 
-    and times. A sliding window of the last three event titles is maintained to avoid duplicate entries.
-    
-    Returns:
-        list: A list of dictionaries, each containing the following keys:
-            - "title": The event title.
-            - "date": The event date as found on the page.
-            - "start": The start time (from the first time tag in a time pair).
-            - "end": The end time (from the second time tag in a time pair).
-    """
-    recent_titles = []            # Sliding window for the last 3 event titles to avoid duplicates.
-    events_title_time_list = []   # List to store event dictionaries.
+    """Scrape event data from the theatre website between 2023 and Feb 2025."""
+    recent_titles = [] 
+    events_title_time_list = []
 
     for year in range(2023, 2026):
         for month in range(1, 13):
-            # Stop processing after February 2025.
             if year == 2025 and month == 3:
                 break
 
@@ -79,14 +65,8 @@ def scrab_all_year_data():
     return events_title_time_list
 
 def export_to_csv(data, filename="output.csv"):
-    """
-    Exports the given data to a CSV file.
-    it uses the csv module. 
-    
-    Args:
-        data: The data to export; can be either a list of dictionaries or a DataFrame.
-        filename (str): The target CSV file name.
-    """
+    """Export the given data to a CSV file using the csv module."""
+
     if isinstance(data, list):
         if not data:
             print("No data to export.")
@@ -101,11 +81,7 @@ def export_to_csv(data, filename="output.csv"):
                 writer.writerow(row)
 
 def main():
-    """
-    Main function that:
-        1. Checks if 'events_data.csv' exists. If not, scrapes event data and exports it.
-        2. Checks if 'post_events_survey_data.csv' exists. If not, processes survey responses and exports them.
-    """
+    """Download event data if it doesn't already exist."""
 
     base_dir = os.path.dirname(os.path.dirname(__file__))
     project_root = os.path.dirname(base_dir)
