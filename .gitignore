@@ -1,2 +1,4 @@
-.env.cred.env.cred
+.env.cred
+.DS_Store
+__pycache__/
 .venv/
