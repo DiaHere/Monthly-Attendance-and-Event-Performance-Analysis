@@ -96,6 +96,7 @@ def main():
         events = scrab_all_year_data()
         export_to_csv(events, filename=output_csv_path)
         print("Exported event data to 'events_data.csv'.")
+        
     
 if __name__ == '__main__':
     main()
