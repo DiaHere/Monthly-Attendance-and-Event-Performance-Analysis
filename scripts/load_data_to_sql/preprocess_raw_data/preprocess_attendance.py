@@ -19,15 +19,18 @@ def preprocess_df_attendance():
 
     # rename the columns of the dataframe to match the sql table
     df_attendance.rename(columns={
-    "Total days in use": "total_days_in_use",
-    "Number of separate events": "num_sep_events",
-    "Total unique patrons": "total_unique_patrons",
-    "Total attendance": "total_attendance",
-    "First time visitors": "total_first_time_visitors"
+        "Total days in use": "total_days_in_use",
+        "Number of separate events": "num_sep_events",
+        "Total unique patrons": "total_unique_patrons",
+        "Total attendance": "total_attendance",
+        "First time visitors": "total_first_time_visitors"
     }, inplace = True)
+
+    df_attendance.drop(columns = 'date', inplace = True)
 
     # return the dataframe
     return df_attendance
+
 
 
     

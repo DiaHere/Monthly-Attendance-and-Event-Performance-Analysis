@@ -15,7 +15,7 @@ def preprocess_df_tickets():
     df_tickets = load_csv_tickets()
 
     # Convert the date column to a datetime format
-    df_tickets['date_range'] = pd.to_datetime(df_tickets['Accounting Date'], format = '%m/%d/%Y')
+    df_tickets['date'] = pd.to_datetime(df_tickets['Accounting Date'], format = '%m/%d/%Y')
 
     # Drop columns that are null and not needed anymore
     df_tickets.drop(columns = ['Accounting Date','Stock Item Name','Amount','Total Received'], inplace = True)

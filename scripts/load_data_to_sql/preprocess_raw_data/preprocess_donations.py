@@ -15,7 +15,7 @@ def preprocess_df_donations():
     df_donations = load_csv_donations_csv()
 
     # Convert the date column to a datetime format
-    df_donations['date_range'] = pd.to_datetime(df_donations['Accounting Date'], format = '%m/%d/%Y')
+    df_donations['date'] = pd.to_datetime(df_donations['Accounting Date'], format = '%m/%d/%Y')
     df_donations.drop(columns = 'Accounting Date', inplace = True)
 
     # Rename columns to match the sql table

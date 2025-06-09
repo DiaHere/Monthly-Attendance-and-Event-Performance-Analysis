@@ -28,18 +28,18 @@ def main():
     df_surveys = preprocess_df_post_event_sur()
     surveys_col = df_surveys.columns
     load_data_to_sql(df_surveys, 'post_event_surveys', surveys_col, 'event_title')
-
+    
     df_donations = preprocess_df_donations()
     donations_col = df_donations.columns
-    load_data_to_sql(df_donations, 'donations', donations_col, 'date_range')
+    load_data_to_sql(df_donations, 'donations', donations_col, 'date')
 
     df_refunds = preprocess_df_refunds()
     refunds_col = df_refunds.columns
-    load_data_to_sql(df_refunds, 'credit_refunds', refunds_col, 'date_range')
+    load_data_to_sql(df_refunds, 'credit_refunds', refunds_col, 'date')
 
     df_tickets = preprocess_df_tickets()
     tickets_col = df_tickets.columns
-    load_data_to_sql(df_tickets, 'tickets', tickets_col, 'date_range')
-
+    load_data_to_sql(df_tickets, 'tickets', tickets_col, 'date')
+    
 if __name__ == '__main__':
     main()

@@ -15,7 +15,7 @@ def preprocess_df_refunds():
     df_refunds = load_csv_credits_refunds()
 
     # Convert the date column to a datetime format
-    df_refunds['date_range'] = pd.to_datetime(df_refunds['Accounting Date'], format = '%m/%d/%Y')
+    df_refunds['date'] = pd.to_datetime(df_refunds['Accounting Date'], format = '%m/%d/%Y')
     df_refunds.drop(columns = 'Accounting Date', inplace = True)
 
     # Rename columns to match the sql table

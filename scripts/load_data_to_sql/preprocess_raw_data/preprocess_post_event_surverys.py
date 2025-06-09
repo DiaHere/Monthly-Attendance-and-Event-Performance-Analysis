@@ -46,11 +46,10 @@ def preprocess_df_post_event_sur():
     df_surveys['date'] = pd.to_datetime(df_surveys['Instance'], format='%m/%d/%Y')
 
     # Remove columns that are no longer needed after consolidation and cleaning
-    df_surveys.drop(columns = ['event','Television','Event','Instance','The Idaho Statesman','ParentMap','Date'], inplace = True)
+    df_surveys.drop(columns = ['event','Television','Event','Instance','The Idaho Statesman','ParentMap','Date', 'ID'], inplace = True)
 
     # Rename columns to match the sql table
     df_surveys.rename(columns={
-    "ID": "id",
     "What is your age group?": "age_group",
     "What is your annual household income?": "annual_household_income",
     "What was your overall impression of this event (quality, lighting, sound, value)?": "overal_event_expression",

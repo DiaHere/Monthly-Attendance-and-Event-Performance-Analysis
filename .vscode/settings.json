@@ -6,13 +6,14 @@
                 "enableSsl": "Disabled"
             },
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "127.0.0.1",
             "port": 3306,
             "driver": "MySQL",
             "name": "Power House Theatre Performance Database",
             "database": "theatre_performance_data",
             "username": "DiaHere",
-            "connectionTimeout": 30
+            "connectionTimeout": 30,
+            "password": "Diadana2005"
         }
     ]
 }
