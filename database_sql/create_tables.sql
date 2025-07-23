@@ -61,7 +61,6 @@ CREATE TABLE IF NOT EXISTS tickets(
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 
-
 -- Create a CTE calendar table
 SET @startdate := '2023-01-01', 
     @enddate := '2025-03-01';
@@ -82,4 +81,3 @@ FROM (
     )
     SELECT calendar_date FROM cal
 ) AS x;
-
