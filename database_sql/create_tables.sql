@@ -13,6 +13,12 @@ CREATE TABLE IF NOT EXISTS attendance(
     total_first_time_visitors INT
 );
 
+-- later verified to be incorrect data
+ALTER TABLE attendance
+DROP COLUMN num_sep_events,
+DROP COLUMN total_days_in_use;
+
+
 -- Create events table
 CREATE TABLE IF NOT EXISTS events(
     event_id INT AUTO_INCREMENT PRIMARY KEY,
