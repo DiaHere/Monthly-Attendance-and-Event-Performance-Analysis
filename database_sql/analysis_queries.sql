@@ -72,6 +72,7 @@ SELECT
     ROUND((e.end_time - e.start_time) / 100, 2) AS duration,
     monthly_event_counts.num_events,
     ROUND(a.total_attendance / monthly_event_counts.num_events, 2) AS avg_attendance_per_event
+    ROUND(a.first_timer_ratio / monthly_event_counts.num_events, 2) AS avg_first_time_visitors_per_event
 FROM events AS e
 LEFT JOIN attendance AS a 
     ON MONTH(e.date) = MONTH(a.month_year) AND YEAR(e.date) = YEAR(a.month_year)
